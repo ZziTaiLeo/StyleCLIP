@@ -2,3 +2,7 @@
 /latents/
 /results/
 /mine/
+/pretrained_models/
+/global_directions/result/
+/global_directions/model/
+/global_directions/npy/ffhq/
