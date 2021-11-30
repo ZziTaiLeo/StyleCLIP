@@ -1,0 +1,3 @@
+def func():
+    sleep(1)
+

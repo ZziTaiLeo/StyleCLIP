@@ -1,0 +1,11 @@
+/.idea/
+/latents/
+/results/
+/mine/
+*.mp4
+*.pt
+*.jpg
+*.png
+/global_directions/npy/
+/global_directions/model/
+
