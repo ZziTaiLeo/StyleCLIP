@@ -6,3 +6,5 @@
 /global_directions/result/
 /global_directions/model/
 /global_directions/npy/ffhq/
+*.mp4
+*.pt
