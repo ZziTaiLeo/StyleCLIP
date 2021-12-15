@@ -1,9 +1,12 @@
 import os
+import sys
 
+sys.path.append('/home/ming13/editor/pycharm-2021.1.1/workplace/styleClip/StyleCLIP/global_directions')
 from manipulate import Manipulator
 import tensorflow as tf
 import numpy as np
 import torch
+from torch.nn import DataParallel
 import clip
 from MapTS import GetBoundary, GetDt
 
@@ -13,9 +16,10 @@ class StyleCLIP():
     def __init__(self, dataset_name='ffhq'):
         print('load clip')
         # 分配设备
-        device = "cuda:0" if torch.cuda.is_available() else "cpu"
+        device = "cuda:1" if torch.cuda.is_available() else "cpu"
         # 读取模型
-        self.model, preprocess = clip.load("ViT-B/32", device=device)
+        self.model, self.preprocess = clip.load("ViT-B/32", device=device)
+        #self.model = DataParallel(self.model, [0, 1])
         self.LoadData(dataset_name)
 
     def LoadData(self, dataset_name):
@@ -27,7 +31,8 @@ class StyleCLIP():
         self.M = M
         self.fs3 = fs3
         # 加载e4e data
-        w_plus = np.load('./data/' + dataset_name + '/w_plus.npy')
+        w_plus = torch.load(r'./data/ffhq/latents.pt').cpu().numpy()
+        # w_plus = np.load('./data/' + dataset_name + '/w_plus.npy')
         # W to S空间
         self.M.dlatents = M.W2S(w_plus)
         # 保存S空间的数据
@@ -85,6 +90,11 @@ class StyleCLIP():
 
         codes = self.GetCode()
         out = self.M.GenerateImg(codes)
+        img = out[0, 0]
+        return img
+
+    def GetOriImg(self, latent):
+        out = self.M.GenerateImg(latent)
         img = out[0, 0]
         return img
 

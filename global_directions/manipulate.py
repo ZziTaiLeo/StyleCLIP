@@ -4,11 +4,13 @@ import os
 import os.path
 import sys
 sys.path.append('/home/ming13/editor/pycharm-2021.1.1/workplace/styleClip/StyleCLIP/global_directions/GetGUIData.py')
+sys.path.append('/home/ming13/editor/pycharm-2021.1.1/workplace/styleClip/StyleCLIP/global_directions/utils')
+sys.path.append('/home/ming13/editor/pycharm-2021.1.1/workplace/styleClip/StyleCLIP/')
 import pickle
 import numpy as np
 import tensorflow as tf
 from dnnlib import tflib
-from utils.visualizer import HtmlPageVisualizer
+from global_directions.utils.visualizer import HtmlPageVisualizer
 
 gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.7)
 config = tf.ConfigProto(log_device_placement=False,gpu_options=gpu_options)

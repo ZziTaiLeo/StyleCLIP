@@ -65,7 +65,6 @@ def SplitS(ds_p,M,if_std):
         end=start+tmp
         tmp=ds_p[start:end]
 #        tmp=tmp*M.code_std[i]
-        
         all_ds.append(tmp)
         start=end
     
